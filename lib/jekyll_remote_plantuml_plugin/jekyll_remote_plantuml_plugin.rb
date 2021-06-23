@@ -94,7 +94,7 @@ module JekyllRemotePlantUMLPlugin
     def img_local_src(context, encoded_content, url, options)
       # prepare source image path
       site = context.registers[:site]
-      image_basename = "#{encoded_content}.#{options[:format]}"
+      image_basename = "#{Digest::SHA1.hexdigest encoded_content}.#{options[:format]}"
       source_image_path = File.join(site.source, options[:cache_dir], image_basename)
 
       unless File.exist?(source_image_path)
