@@ -1,7 +1,7 @@
 # Jekyll Remote PlantUML Plugin
 
-The plugin includes local/remote PlantUML diagrams into your pages, works only with an external PlantUML server 
-(http://www.plantuml.com/plantuml by default) — PlantUML jar installed locally not required.
+The plugin includes local/remote PlantUML diagrams into your pages, works only with an external PlantUML server
+(http://www.plantuml.com/plantuml by default) — PlantUML jar installed locally is not required.
 
 ## Usage
 
@@ -53,8 +53,8 @@ Bob -> Alice : Hello
 
 ## Configuration
 
-In the configuration file, you can override the preset values and define defaults for format, div and img tags 
-attributes.
+In the Jekyll config (`_config.yml`), you can override the preset values and define defaults for the 
+image extension, div and img tags attributes.
 
 Below are the supported parameters and their defaults:
 ```yaml
@@ -103,4 +103,4 @@ bundle install
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
