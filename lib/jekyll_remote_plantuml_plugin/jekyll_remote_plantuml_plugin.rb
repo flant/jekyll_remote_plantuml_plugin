@@ -41,15 +41,12 @@ module JekyllRemotePlantUMLPlugin
 
     def render(context)
       content = super(context).strip
-      encoded_content = encode(content)
       options = tag_options(context)
 
       check_format(options[:format])
 
-      url = generate_url(options[:provider], encoded_content, options[:format])
-      check_server(url, content)
-
-      img_src_attr = options[:save_images_locally] ? img_local_src(context, encoded_content, url, options) : url
+      url = generate_url(options[:provider], encode(content), options[:format])
+      img_src_attr = options[:save_images_locally] ? img_local_src(context, content, url, options) : url
       prepare_html(img_src_attr, options)
     end
 
@@ -91,14 +88,26 @@ module JekyllRemotePlantUMLPlugin
       end
     end
 
-    def img_local_src(context, encoded_content, url, options)
+    def img_local_src(context, content, url, options)
       # prepare source image path
       site = context.registers[:site]
-      image_basename = "#{Digest::SHA1.hexdigest encoded_content}.#{options[:format]}"
+      image_basename = "#{Digest::SHA1.hexdigest encode(content)}.#{options[:format]}"
       source_image_path = File.join(site.source, options[:cache_dir], image_basename)
 
       unless File.exist?(source_image_path)
-        download_image(url, source_image_path)
+        begin
+          download_image(url, source_image_path)
+        rescue StandardError => e
+          raise <<~TEXT
+            The download of the PlantUml diagram image failed: #{e}
+    
+            === CONTENT START
+            #{content}
+            === CONTENT END
+
+            URL: #{url}
+          TEXT
+        end
 
         # make the image available in the destination directory
         site.static_files << Jekyll::StaticFile.new(site, site.source, options[:cache_dir], image_basename)
@@ -109,25 +118,6 @@ module JekyllRemotePlantUMLPlugin
 
     def check_format(format)
       raise "Invalid PlantUML diagram format \"#{format}\"" unless FORMATS.include?(format)
-    end
-
-    def check_server(url, content)
-      response = Net::HTTP.get_response(URI(url))
-      return if response.is_a?(Net::HTTPSuccess)
-
-      raise <<~TEXT
-        The download of the PlantUml diagram image failed
-
-        URL: #{url}
-
-        === CONTENT START
-        #{content}
-        === CONTENT END
-
-        === RESPONSE BODY START
-        #{res.body}
-        === RESPONSE BODY END
-      TEXT
     end
 
     def prepare_html(img_src_attr, options)
