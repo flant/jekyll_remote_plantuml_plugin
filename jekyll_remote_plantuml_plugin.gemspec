@@ -6,9 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Alexey Igrychev"]
   spec.email = ["alexey.igrychev@flant.com"]
 
-  spec.summary = "Jekyll plugin that allows including local/remote PlantUML diagrams into your pages, works only with" \
-                 " an external PlantUML server (http://www.plantuml.com/plantuml by default) — PlantUML jar installed" \
-                 " locally not required."
+  spec.summary = "Jekyll plugin for including local/remote PlantUML diagrams into your pages"
   spec.homepage = "https://github.com/flant/jekyll_remote_plantuml_plugin"
   spec.license = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.3")
