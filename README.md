@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/jekyll_remote_plantuml_plugin.svg)](https://badge.fury.io/rb/jekyll_remote_plantuml_plugin)
+
 # Jekyll Remote PlantUML Plugin
 
 The plugin includes local/remote PlantUML diagrams into your pages, works only with an external PlantUML server
