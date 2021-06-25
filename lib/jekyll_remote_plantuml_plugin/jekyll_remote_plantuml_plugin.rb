@@ -99,7 +99,7 @@ module JekyllRemotePlantUMLPlugin
           download_image(url, source_image_path)
         rescue StandardError => e
           raise <<~TEXT
-            The download of the PlantUml diagram image failed: #{e}
+            The download of the PlantUML diagram image failed: #{e}
     
             === CONTENT START
             #{content}
