@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    tags:        
-      - v*
+    branches:
+      - main
 
 jobs:
   build:
@@ -14,24 +14,31 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.6.x
+      - uses: GoogleCloudPlatform/release-please-action@v2
+        id: release
+        with:
+          release-type: ruby
+          package-name: jekyll_remote_plantuml_plugin
+          bump-minor-pre-major: true
+          version-file: "lib/jekyll_remote_plantuml_plugin/version.rb"
 
-    - name: Publish to RubyGems
-      run: |
-        mkdir -p $HOME/.gem
-        touch $HOME/.gem/credentials
-        chmod 0600 $HOME/.gem/credentials
-        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push *.gem
-      env:
-        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
-    
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
+      - uses: actions/checkout@v2
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+        if: ${{ steps.release.outputs.release_created }}
