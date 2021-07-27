@@ -17,6 +17,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*.rb"]
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "jekyll", "~> 3.9"
+  spec.add_runtime_dependency "jekyll", ">= 3.5", "< 5.0"
   spec.add_runtime_dependency "liquid", "~> 4.0"
 end
