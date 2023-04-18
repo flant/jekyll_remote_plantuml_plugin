@@ -19,13 +19,13 @@ jobs:
           bump-minor-pre-major: true
           version-file: "lib/jekyll_remote_plantuml_plugin/version.rb"
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         if: ${{ steps.release.outputs.release_created }}
 
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
+      - name: Set up Ruby 2.7
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.x
+          ruby-version: 2.7.x
         if: ${{ steps.release.outputs.release_created }}
 
       - name: Publish to RubyGems
