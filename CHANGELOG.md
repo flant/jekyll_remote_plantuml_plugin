@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.3](https://www.github.com/flant/jekyll_remote_plantuml_plugin/compare/v0.2.2...v0.2.3) (2023-04-18)
+
+
+### Bug Fixes
+
+* wrong format for ruby_version ([21108f4](https://www.github.com/flant/jekyll_remote_plantuml_plugin/commit/21108f469aecdaf21e46d805e34c2402b087cdd8))
+
 ### [0.2.2](https://www.github.com/flant/jekyll_remote_plantuml_plugin/compare/v0.2.1...v0.2.2) (2023-04-18)
 
 
