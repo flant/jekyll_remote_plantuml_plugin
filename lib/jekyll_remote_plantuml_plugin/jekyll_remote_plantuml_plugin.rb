@@ -59,7 +59,7 @@ module JekyllRemotePlantUMLPlugin
       tag_options.each { |key, _| tag_options.delete(key) unless TAG_OPTIONS.include?(key) }
 
       # merge with config options
-      configuration_options.merge(tag_options)
+      configuration_options(context).merge(tag_options)
     end
 
     # rubocop:disable Metrics/MethodLength
@@ -78,8 +78,8 @@ module JekyllRemotePlantUMLPlugin
     end
     # rubocop:enable Metrics/MethodLength
 
-    def configuration_options
-      @configuration_options ||= Jekyll.configuration({})["plantuml"].transform_keys(&:to_sym).tap do |conf|
+    def configuration_options(context)
+      @configuration_options ||= context.registers[:site].config["plantuml"].transform_keys(&:to_sym).tap do |conf|
         # delete unsupported options
         conf.each { |key, _| conf.delete(key) unless CONFIG_OPTIONS.include?(key) }
 
