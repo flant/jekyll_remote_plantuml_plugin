@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.2](https://www.github.com/flant/jekyll_remote_plantuml_plugin/compare/v0.2.1...v0.2.2) (2023-04-18)
+
+
+### Bug Fixes
+
+* bump obsolete action version, bump ruby to 2.7 ([7c4ce9a](https://www.github.com/flant/jekyll_remote_plantuml_plugin/commit/7c4ce9a56325f269a69cdf707554c12d49c4b98b))
+
 ### [0.2.1](https://www.github.com/flant/jekyll_remote_plantuml_plugin/compare/v0.2.0...v0.2.1) (2023-04-18)
 
 
