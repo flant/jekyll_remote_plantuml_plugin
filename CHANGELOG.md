@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/flant/jekyll_remote_plantuml_plugin/compare/v0.2.0...v0.2.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* use context to get configuration ([a4b8388](https://www.github.com/flant/jekyll_remote_plantuml_plugin/commit/a4b8388f3345f265ac0dea10e066b9db2730a53e))
+
 ## [0.2.0](https://www.github.com/flant/jekyll_remote_plantuml_plugin/compare/v0.1.1...v0.2.0) (2021-07-27)
 
 
